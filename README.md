@@ -1,4 +1,4 @@
-# kConnect 
+# kConnect (Plugin is not done yet)
 kuubik.eu website &amp; minecraft server account linking plugin.
 This plugin generates a random code and inserts it into the database with player username. So that they can insert this code on the website. Codes can be generated and used only once and players can't delete their codes. 
 
