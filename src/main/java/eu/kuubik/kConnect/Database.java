@@ -83,14 +83,6 @@ public class Database implements Listener {
             } else {
                 return false;
             }
-
-            /*
-            if (res != null) {
-                return true;
-            } else {
-                return false;
-            }
-            */
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -102,10 +94,8 @@ public class Database implements Listener {
             PreparedStatement insert = connection.prepareStatement("INSERT INTO " + tableName + " (player, code, activated) " +
                         "VALUES ('" + p + "', '" + code + "','0');");
             insert.execute();
-            main.getLogger().info("§9KC §8| §aMängija §f" + p + " §a(§f" + code + "§a) kood on lisatud andmebaasi!");
         } catch (SQLException e) {
             e.printStackTrace();
-            main.getLogger().info("§9KC §8| §cMängija §f" + p + " §ckoodi sisestamisel andmebaasi tekkis ootamatu viga..");
         }
     }
 
@@ -113,10 +103,8 @@ public class Database implements Listener {
         try {
             PreparedStatement delete = connection.prepareStatement("DELETE FROM " + tableName + " WHERE player = '" + p + "';");
             delete.execute();
-            main.getLogger().info("§9KC §8| §aMängija §f" + p + " §akood on kustutatud andmebaasist!");
         } catch (SQLException e) {
             e.printStackTrace();
-            main.getLogger().info("§9KC §8| §cMängija §f" + p + " §ckoodi kustutamisel andmebaasist tekkis ootamatu viga..");
         }
     }
 }
