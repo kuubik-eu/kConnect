@@ -9,9 +9,10 @@ website: https://karmotutk.eu/
 commands:
   kc:
     description: kConnect plugins main command.
-    usage: /kc [reload/info/help/author]
+    usage: /kc [reload/info/generate]
     permission: kconnect.kconnect
     permission-message: Sul ei ole <permission> õigust..
-  genereeri:
+  generate:
     description: Genereerib sulle koodi, mis kodulehel sisestada.
-    usage: /genereeri
+    usage: /generate
+    aliases: [genereeri, gen]

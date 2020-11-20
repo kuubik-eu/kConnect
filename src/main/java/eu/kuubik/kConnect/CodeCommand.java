@@ -17,22 +17,18 @@ public class CodeCommand implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             String playerCode = generateCode(15);
-            sender.sendMessage(plugin.getConfig().getString("Messages.Generate.Yourgeneratedcode") +
-                                  "§a" + playerCode);
-            db.insertUser(player.toString(), playerCode);
-            return true;
-        } else if (sender instanceof ConsoleCommandSender){
-            if (args.length == 1) {
-                String playerCode = generateCode(15);
-                String player = args[0];
-                sender.sendMessage("§7Mängijale §a" + player + " §7on genereeritud kood §a" + playerCode);
-                db.insertUser(player, playerCode);
+
+            if (!db.userHasCode(player.toString())) {
+                sender.sendMessage("§9KC §8| §7Sinu genereeritud kood on - " +"§9" + playerCode);
+                db.insertUser(player.toString(), playerCode);
                 return true;
             } else {
-                sender.sendMessage(plugin.getConfig().getString("Message.Generate.Pleasementionplayer"));
+                sender.sendMessage("§9KC §8| §7Sinule on juba genereeritud kood. Vaata oma koodi käsklusega §9/kc");
+                return true;
             }
         }
-        return false;
+        sender.sendMessage("§KC §8| §7Konsoolis koodi genereerimiseks kasuta käsklust §9/kc gen [mängija]");
+        return true;
     }
 
     static String generateCode(int n) {

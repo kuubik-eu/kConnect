@@ -1,24 +1,9 @@
 # kqrmo @ kuubik.eu
 
-# SQL Connection.
 Database:
   Host: "xxx"
   Username: "xxx"
   Password: "xxx"
   Databasename: "xxx"
+  Tablename: "xxx"
   Port: "3306"
-
-Messages:
-  Commands:
-    Help:
-      Header: "§8===== &9KCONNECT §8====="
-      MainCommand: "§9/kc [help/reload/info] §f- §7kConnect põhiline käsklus"
-      CodeCommand: "§o/genereeri §f- §7Genereerib koodi, mis tuleb kodulehel sisestada"
-      Footer: "§8========================"
-    Reload:
-      Success: "§akConnect edukalt taaslaetud!"
-      Failed: "§akConnect pluginat ei õnnestunud taaslaadida!"
-  SQL:
-    Connected: "§aSQL ühendus edukalt loodud!"
-    Disconnected: "§cSQL ühendus katkestatud!"
-    Failed: "§cSQL ühendust ei suudetud luua!"

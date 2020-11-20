@@ -1,13 +1,9 @@
 package eu.kuubik.kConnect;
 
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+
 public class Database implements Listener {
 
     private kConnect main = kConnect.getPlugin(kConnect.class);
@@ -24,15 +20,15 @@ public class Database implements Listener {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-            main.getLogger().info(main.getConfig().getString("Messages.SQL.Drivernotfound"));
+            main.getLogger().info("§9KC §8| §cJDBC Driverit ei leitud..");
             return;
         }
         try {
             connection = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + dbName, username, password);
             if (connection.isValid(1)) {
-                main.getLogger().info(main.getConfig().getString("Messages.SQL.Connected"));
+                main.getLogger().info("§9KC §8| §aSQL ühendus edukalt loodud!");
             } else {
-                main.getLogger().info(main.getConfig().getString("Messages.SQL.Failed"));
+                main.getLogger().info("§9KC §8| §cSQL ühenduse loomine ebaõnnestus!");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -43,7 +39,7 @@ public class Database implements Listener {
         try {
             if (connection != null && !connection.isClosed()) {
                 connection.close();
-                main.getLogger().info(main.getConfig().getString("Messages.SQL.Disconnected"));
+                main.getLogger().info("§9KC §8| §cSQL ühendus katkestatud!");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -53,10 +49,10 @@ public class Database implements Listener {
     public void checkIfTableExists() {
         try {
             if (connection.getMetaData().getTables(null, null, tableName, null) != null) {
-                main.getLogger().info("§cSQL tabelit ei leitud, tabel luuakse..");
+                main.getLogger().info("§9KC §8| §cSQL tabelit ei leitud! &aTabel luuakse..");
                 createTables();
             } else {
-                main.getLogger().info("§aSQL tabel on olemas! Ridade kontrollimine..");
+                main.getLogger().info("§9KC §8| §aSQL tabel on olemas!");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -71,22 +67,57 @@ public class Database implements Listener {
                                                                     "activated BOOLEAN default FALSE" +
                                                                     ");");
             create.execute();
-            main.getLogger().info("§aTabel §f" + tableName + " §aedukalt loodud!");
+            main.getLogger().info("§9KC §8| §aTabel §f" + tableName + " §aedukalt loodud!");
         } catch (SQLException e) {
             e.printStackTrace();
-            main.getLogger().info("§cTabeli loomisel tekkis ootamatu viga..");
+            main.getLogger().info("§9KC §8| §cTabeli loomisel tekkis ootamatu viga..");
+        }
+    }
+
+    public boolean userHasCode(String p) {
+        try {
+            PreparedStatement select = connection.prepareStatement("SELECT 'player' FROM " + tableName + " WHERE player = '" + p + "';");
+            boolean res = select.execute();
+            if (res) {
+                return true;
+            } else {
+                return false;
+            }
+
+            /*
+            if (res != null) {
+                return true;
+            } else {
+                return false;
+            }
+            */
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 
     public void insertUser(String p, String code) {
         try {
             PreparedStatement insert = connection.prepareStatement("INSERT INTO " + tableName + " (player, code, activated) " +
-                                                                    "VALUES ('"+ p + "', '"+ code +"','0');");
+                        "VALUES ('" + p + "', '" + code + "','0');");
             insert.execute();
-            main.getLogger().info("§aMängija §f" + p + " §a(§f" + code + "§a) kood on lisatud andmebaasi!");
+            main.getLogger().info("§9KC §8| §aMängija §f" + p + " §a(§f" + code + "§a) kood on lisatud andmebaasi!");
         } catch (SQLException e) {
             e.printStackTrace();
-            main.getLogger().info("§cMängija §f" + p + " §ckoodi sisestamisel andmebaasi tekkis ootamatu viga..");
+            main.getLogger().info("§9KC §8| §cMängija §f" + p + " §ckoodi sisestamisel andmebaasi tekkis ootamatu viga..");
+        }
+    }
+
+    public void deleteUser(String p) {
+        try {
+            PreparedStatement delete = connection.prepareStatement("DELETE FROM " + tableName + " WHERE player = '" + p + "';");
+            delete.execute();
+            main.getLogger().info("§9KC §8| §aMängija §f" + p + " §akood on kustutatud andmebaasist!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            main.getLogger().info("§9KC §8| §cMängija §f" + p + " §ckoodi kustutamisel andmebaasist tekkis ootamatu viga..");
         }
     }
 }
+
