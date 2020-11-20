@@ -17,7 +17,7 @@ public class CodeCommand implements CommandExecutor {
             Player player = (Player) sender;
             String playerName = sender.getName();
             int n = 15;
-            sender.sendMessage("§9" + playerName + "§7, sinu genereeritud kood on:\n" +
+            sender.sendMessage(plugin.getConfig().getString("Messages.Generate.Yourgeneratedcode") +
                                   "§a" + generateCode(n));
             return true;
         } else if (sender instanceof ConsoleCommandSender){
@@ -26,7 +26,7 @@ public class CodeCommand implements CommandExecutor {
                 sender.sendMessage("§7Mängijale §a" + player + " §7on genereeritud kood §a" + generateCode(20));
                 return true;
             } else {
-                sender.sendMessage("§cPalun märgi mängija, kellele soovid koodi genereerida.");
+                sender.sendMessage(plugin.getConfig().getString("Message.Generate.Pleasementionplayer"));
             }
         }
         return false;

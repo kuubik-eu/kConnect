@@ -1,68 +1,40 @@
 package eu.kuubik.kConnect;
 
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.Set;
-
 public class kConnect extends JavaPlugin {
 
-    FileConfiguration config = getConfig();
-    public PluginDescriptionFile pd = this.getDescription();
-    public File configFile = new File(this.getDataFolder(), "config.yml");
-    private File file;
-    final String host = getConfig().getString("Database.Host");
-    final String username = getConfig().getString("Database.Username");
-    final String password = getConfig().getString("Database.Password");
-    final String dbName = getConfig().getString("Database.Databasename");
-    final String port = getConfig().getString("Database.Port");
-    final String url = "jdbc:mysql://"+host+":3306/" + dbName + "";
-    static Connection connection;
 
     @Override
     public void onEnable() {
+        Database db = new Database();
+        db.dbConnect();
         updateConfig();
-
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            System.err.println("§cJDBC driverit ei leitud!");
-            return;
-        }
-        try {
-            connection = DriverManager.getConnection("jdbc:mysql://" + this.host + ":" + this.port + "/" + this.dbName, this.username, this.password);
-            if (connection.isValid(1)) {
-                getLogger().info("§aSQL Connected!");
-            } else {
-                getLogger().info("§cCheck your SQL connection data in config!");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
         getCommand("kc").setExecutor(new MainCommand());
         getCommand("genereeri").setExecutor((new CodeCommand()));
-        getLogger().info("§akConnect §fv"+ getDescription().getVersion() +" §akäivitatud!");
+        getLogger().info("\n\n§9 /$$   /$$  /$$$$$$ \n" +
+                "§9| $$  /$$/ /$$__  $$ \n" +
+                "§9| $$ /$$/ | $$  \\__/\n" +
+                "§9| $$$$$/  | $$             §fKCONNECT §7@ §fkuubik.eu\n" +
+                "§9| $$  $$  | $$             §aENABLED\n" +
+                "§9| $$\\  $$ | $$    $$\n" +
+                "§9| $$ \\  $$|  $$$$$$/\n" +
+                "§9|__/  \\__/ \\______/ \n");
     }
 
     @Override
     public void onDisable() {
-        try {
-            if (connection != null && !connection.isClosed()) {
-                connection.close();
-                getLogger().info("§cSQL Disconnected!");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        getLogger().info("§ckConnect §fv" + getDescription().getVersion() + " §cplugin peatatud!");
+        Database db = new Database();
+        db.dbDisconnect();
+        getLogger().info("\n\n§9 /$$   /$$  /$$$$$$ \n" +
+                "§9| $$  /$$/ /$$__  $$ \n" +
+                "§9| $$ /$$/ | $$  \\__/\n" +
+                "§9| $$$$$/  | $$             §fKCONNECT §7@ §fkuubik.eu\n" +
+                "§9| $$  $$  | $$             §cDISABLED\n" +
+                "§9| $$\\  $$ | $$    $$\n" +
+                "§9| $$ \\  $$|  $$$$$$/\n" +
+                "§9|__/  \\__/ \\______/ \n");
     }
 
     private void updateConfig() {
@@ -90,4 +62,5 @@ public class kConnect extends JavaPlugin {
             saveConfig();
         }
     }
+
 }

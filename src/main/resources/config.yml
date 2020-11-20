@@ -15,6 +15,9 @@ Messages:
       MainCommand: "§9/kc [help/reload/info] §f- §7kConnect põhiline käsklus"
       CodeCommand: "§o/genereeri §f- §7Genereerib koodi, mis tuleb kodulehel sisestada"
       Footer: "§8========================"
+    Generate:
+      Yourgeneratedcode: "§7Sinu genereeritud kood on"
+      Pleasementionplayer: "§7cPalun märgi mängija, kellele soovid koodi genereerida"
     Reload:
       Success: "§akConnect edukalt taaslaetud!"
       Failed: "§akConnect pluginat ei õnnestunud taaslaadida!"
@@ -22,3 +25,4 @@ Messages:
     Connected: "§aSQL ühendus edukalt loodud!"
     Disconnected: "§cSQL ühendus katkestatud!"
     Failed: "§cSQL ühendust ei suudetud luua!"
+    Drivernotfound: "§cJDBC Driverit ei leitud!"
