@@ -10,6 +10,7 @@ public class kConnect extends JavaPlugin {
     public void onEnable() {
         Database db = new Database();
         db.dbConnect();
+        db.checkIfTableExists();
         updateConfig();
         getCommand("kc").setExecutor(new MainCommand());
         getCommand("genereeri").setExecutor((new CodeCommand()));

@@ -1,11 +1,9 @@
 package eu.kuubik.kConnect;
 
-import jdk.vm.ci.hotspot.HotSpotJVMCIRuntime;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 

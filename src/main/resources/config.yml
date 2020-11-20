@@ -6,6 +6,7 @@ Database:
   Username: "xxx"
   Password: "xxx"
   Databasename: "xxx"
+  Tablename: "xxx"
   Port: "3306"
 
 Messages:

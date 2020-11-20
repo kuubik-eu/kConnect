@@ -13,17 +13,20 @@ public class CodeCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        Database db = new Database();
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            String playerName = sender.getName();
-            int n = 15;
+            String playerCode = generateCode(15);
             sender.sendMessage(plugin.getConfig().getString("Messages.Generate.Yourgeneratedcode") +
-                                  "§a" + generateCode(n));
+                                  "§a" + playerCode);
+            db.insertUser(player.toString(), playerCode);
             return true;
         } else if (sender instanceof ConsoleCommandSender){
             if (args.length == 1) {
-                String player = Bukkit.getServer().getPlayer(args[0]).getName();
-                sender.sendMessage("§7Mängijale §a" + player + " §7on genereeritud kood §a" + generateCode(20));
+                String playerCode = generateCode(15);
+                String player = args[0];
+                sender.sendMessage("§7Mängijale §a" + player + " §7on genereeritud kood §a" + playerCode);
+                db.insertUser(player, playerCode);
                 return true;
             } else {
                 sender.sendMessage(plugin.getConfig().getString("Message.Generate.Pleasementionplayer"));
