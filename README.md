@@ -1,4 +1,4 @@
-# kConnect (Plugin on poolik)
+# kConnect 
 Plugin, mille abil saab kuubik.eu kodulehel ja kuubik minecraft serveris olevaid kasutajaid siduda.
 Plugin genereerib suvalise koodi ning sisestab selle andmebaasi koos kasutajanimega, siis kasutaja saab oma koodi sisestada kodulehel kasutaja kontrollpaneelis. Koode saab genereerida ainult ühe korra ning koode ei saa kustutada. 
 
@@ -6,13 +6,9 @@ Plugin genereerib suvalise koodi ning sisestab selle andmebaasi koos kasutajanim
 ##
 **Käsklused:** 
   - /kc reload - Taaslaeb plugina.
-  - /kc info - Näitab plugina informatsiooni, mida see teeb & autorit.
-  - /kc gen/generate/genereeri [mängija] - Genereerib koodi märgitud mängijale *(KONSOOL)*
-  - /kc del/delete/kustuta [mängija] - Kustutab kasutaja koodi andmebaasist *(KONSOOL)*
-  - /kc view/vaata [mängija] - Vaata mängijale genereeritud koodi. (kui on) *(KONSOOL)*
+  - /kc gen/ [mängija] - Genereerib koodi märgitud mängijale *(KONSOOL)*
+  - /kc del/ [mängija] - Kustutab kasutaja koodi andmebaasist *(KONSOOL)*
   - /genereeri - Genereerib koodi mängijale.
-  - /vaata - Vaata endale genereeritud koodi (kui on).
 
- 
   ##
   *Plugina autor **kqrmo** @ kuubik.eu* :heart:
