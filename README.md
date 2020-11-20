@@ -6,8 +6,8 @@ Plugin genereerib suvalise koodi ning sisestab selle andmebaasi koos kasutajanim
 ##
 **Käsklused:** 
   - /kc reload - Taaslaeb plugina.
-  - /kc gen/ [mängija] - Genereerib koodi märgitud mängijale *(KONSOOL)*
-  - /kc del/ [mängija] - Kustutab kasutaja koodi andmebaasist *(KONSOOL)*
+  - /kc gen [mängija] - Genereerib koodi märgitud mängijale *(KONSOOL)*
+  - /kc del [mängija] - Kustutab kasutaja koodi andmebaasist *(KONSOOL)*
   - /genereeri - Genereerib koodi mängijale.
 
   ##
